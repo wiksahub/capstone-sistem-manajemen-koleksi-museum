@@ -16,7 +16,7 @@ inventory = [
 ]
 
 header = f"| {"ID Item":<15} | {"Nama Item":<26}| {"Kategori": <15}| {"Berat":<8}| {"Kondisi":<10} | {"Tahun Masuk":<8} | {"Estimasi Nilai":<12} |"
-
+lebar_tabel = 118
 
 # Membuat infinite loop untuk menu aplikasi
 while True:
@@ -46,18 +46,17 @@ Menu Read Aplikasi:
             menuRead = input("Input nomor menu yang ingin dipilih: ")
             if menuRead == "1":
                 while True:
-                    print("Inventaris Museum".center(118))  # judul dari menu read
-                    print("="*118) # border
+                    print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
+                    print("="*lebar_tabel) # border
                     print(header) # header tabel read
-                    print("="*118) #border
+                    print("="*lebar_tabel) #border
                     total_nilai = 0                        
                     for i in range(len(inventory)):
                         print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
                         total_nilai += inventory[i]['estimasi_nilai']
-                    print("="*118)
+                    print("="*lebar_tabel)
                     print(f"Jumlah koleksi: {len(inventory)} item")
                     print(f"Total estimasi nilai aset: ${total_nilai}") 
-                    # print("="*118)
                     print("\n0. Keluar dari menu")   
                     tombol = input("Input '0' jika ingin keluar: ") #input untuk user memilih untuk keluar dari menu, jika tidak "0", maka muncul prompt bahwa input tidak valid
                     if tombol == "0":
@@ -71,9 +70,9 @@ Menu Read Aplikasi:
                     found = False
                     
                     print(f"\nInventaris Kategori: {readKategori}".center(118))
-                    print("="*118)
+                    print("="*lebar_tabel)
                     print(header)
-                    print("="*118)
+                    print("="*lebar_tabel)
                     
                     for i in range(len(inventory)):
                         if inventory[i]["kategori"].capitalize() == readKategori:    # membandingkan input user dengan value di kolom "kategori"
@@ -82,7 +81,7 @@ Menu Read Aplikasi:
                     if not found:
                         print(f"Item dengan kategori '{readKategori}' tidak ditemukan.".center(118))
                     
-                    print("="*118)
+                    print("="*lebar_tabel)
 
                     while True:                                                             # membuat infinite loop untuk menu tambahan baru
                         print('''
@@ -109,11 +108,11 @@ Apakah ingin mencari kategori lain?
                     for i in range(len(inventory)):
                         if inventory[i]["item_ID"].strip() == readID:
                             print(f"\nData Item ID: {readID}".center(118))
-                            print("="*118)
+                            print("="*lebar_tabel)
                             print(header)
-                            print("="*118)
+                            print("="*lebar_tabel)
                             print(f"| {inventory[i]['item_ID']:<15} | {inventory[i]['nama']:<25} | {inventory[i]['kategori']:<15}| {inventory[i]['berat']:>8}| {inventory[i]['kondisi']:<10} | {inventory[i]['tahun_masuk']:<11} | {inventory[i]['estimasi_nilai']:>14} |")
-                            print("="*118)
+                            print("="*lebar_tabel)
                             found = True
                             break 
                     
@@ -192,13 +191,13 @@ Anda akan menambahkan {item_baru} dengan ID {id_baru},
                                         "tahun_masuk": int(tahun_masuk_baru), 
                                         "estimasi_nilai": int(estimasi_nilai_baru)
                                         }) # menambahkan item yang baru ke dalam tabel yang baru
-                        print("Inventaris Museum".center(118))  # judul dari menu read
-                        print("="*118)              # border
+                        print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
+                        print("="*lebar_tabel)              # border
                         print(header) # header tabel read
-                        print("="*118)
+                        print("="*lebar_tabel)
                         for i in range(len(inventory)):
                             print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
-                        print("="*118) 
+                        print("="*lebar_tabel) 
                         break
                     elif checker1 == "0":
                         break
@@ -228,13 +227,13 @@ Apakah ingin menambah item lain?
     # Menghapus data yang ada pada data collection
     elif mainMenu == "3":
         while True:
-            print("Inventaris Museum".center(118))  # judul dari menu read
-            print("="*118)              # border
+            print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
+            print("="*lebar_tabel)              # border
             print(header) # header tabel read
-            print("="*118)
+            print("="*lebar_tabel)
             for i in range(len(inventory)):
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
-            print("="*118) 
+            print("="*lebar_tabel) 
 
             hapus_id = input("Masukkan ID item yang ingin dihapus (ketik 0 untuk membatalkan): ").upper()
             if hapus_id == "0":
@@ -287,13 +286,13 @@ Apakah anda ingin menghapus item lain?
     # Merubah parameter pada data
     elif mainMenu == "4":
         while True:
-            print("Inventaris Museum".center(118))  # judul dari menu read
-            print("="*118)              # border
+            print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
+            print("="*lebar_tabel)              # border
             print(header) # header tabel read
-            print("="*118)
+            print("="*lebar_tabel)
             for i in range(len(inventory)):
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
-            print("="*118)
+            print("="*lebar_tabel)
 
             ubah_item = input("Input ID item yang akan diubah (input 0 untuk keluar): ").upper() # input untuk memasukkan ID item yang akan diubah
             if ubah_item == "0":
