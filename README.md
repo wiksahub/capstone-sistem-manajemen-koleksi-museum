@@ -3,6 +3,7 @@ Aplikasi sederhana sebagai capstone modul 1. Sistem Manajemen Koleksi Museum men
 Aplikasi ini mengimplementasi fitur CRUD menggunakan python.
 ## 1. Read
 Pada menu read, pengguna dapat menjalankan beberapa opsi. 
+
 a. Melihat keseluruhan koleksi museum
 Pada opsi ini, pengguna dapat melihat koleksi museum secara menyeluruh serta jumlah item yang ada dalam koleksi serta nilai estimasi dari keseluruhan koleksi.
 
