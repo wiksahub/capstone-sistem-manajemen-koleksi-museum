@@ -30,7 +30,7 @@ Menu Utama:
 2. Menambah Data Baru ke Inventaris Museum
 3. Menghapus Data dari Inventaris Museum
 4. Merubah Data dari Inventaris Museum
-5. Keluar
+0. Keluar
 Input Anda: ''')
 
     # Menampilkan inventaris museum
@@ -384,7 +384,7 @@ Apakah ingin merubah kategori lain?
                 break           
 
     # Keluar dari aplikasi
-    elif mainMenu == "5":
+    elif mainMenu == "0":
         print("Terima kasih! Anda telah keluar dari program.")
         break
     else:
