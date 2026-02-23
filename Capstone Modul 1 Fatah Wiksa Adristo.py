@@ -43,7 +43,7 @@ Menu Read Aplikasi:
 3. Pencarian Berdasarkan ID
 0. Keluar Dari Menu
             ''')
-            menuRead = input("Input nomor menu yang ingin dipilih: ")
+            menuRead = input("Input nomor menu yang ingin dipilih: ").strip()
             if menuRead == "1":
                 while True:
                     print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
@@ -66,7 +66,7 @@ Menu Read Aplikasi:
             
             elif menuRead == "2":
                 while True:
-                    readKategori = input("Input kategori yang ingin ditampilkan: ").capitalize()
+                    readKategori = input("Input kategori yang ingin ditampilkan: ").capitalize().strip()
                     found = False
                     
                     print(f"\nInventaris Kategori: {readKategori}".center(118))
@@ -89,7 +89,7 @@ Apakah ingin mencari kategori lain?
 1. Cari kategori lain
 0. Keluar menu
                               ''')
-                        tombol = input("Input pilhan anda: ")
+                        tombol = input("Input pilhan anda: ").strip()
                         
                         if tombol == "1":
                             break                                                              # mengembalikan ke menu tambahan item
@@ -102,7 +102,7 @@ Apakah ingin mencari kategori lain?
 
             elif menuRead == "3":
                 while True:
-                    readID = input("Input ID Item yang dicari: ").upper()
+                    readID = input("Input ID Item yang dicari: ").upper().strip()
                     found = False
                     
                     for i in range(len(inventory)):
@@ -125,7 +125,7 @@ Apakah ingin mencari item lain?
 1. Cari item lain
 0. Keluar menu
                               ''')
-                        tombol = input("Input pilihan anda: ")
+                        tombol = input("Input pilihan anda: ").strip()
                         
                         if tombol == "1":
                             break                                                              # mengembalikan ke menu tambahan item
@@ -146,23 +146,23 @@ Apakah ingin mencari item lain?
     # Menambahkan stok baru ke inventaris museum
     elif mainMenu == "2":
         while True:
-            item_baru = input("Input nama item baru: ").capitalize()             # user input nama item yang baru
-            kategori_baru = input("Input kategori item baru: ").capitalize()     # user input kategori item baru
+            item_baru = input("Input nama item baru: ").capitalize().strip()             # user input nama item yang baru
+            kategori_baru = input("Input kategori item baru: ").capitalize().strip()     # user input kategori item baru
             while True:
-                berat_baru = input("Input berat item baru (kg): ")               # user input berat item baru
+                berat_baru = input("Input berat item baru (kg): ").strip()               # user input berat item baru
                 if berat_baru.isdigit():
                     break
                 else:
                     print("Input harus dalam integer / angka")
-            kondisi_baru = input("Input kondisi item baru (Rusak/Restorasi/Display): ").capitalize()       # user input kondisi item baru
+            kondisi_baru = input("Input kondisi item baru (Rusak/Restorasi/Display): ").capitalize().strip()       # user input kondisi item baru
             while True:
-                tahun_masuk_baru = input("Input tahun masuk item: ")             # user input berat item baru
+                tahun_masuk_baru = input("Input tahun masuk item: ").strip()             # user input berat item baru
                 if tahun_masuk_baru.isdigit():
                     break
                 else:
                     print("Input tahun harus dalam integer / angka")
             while True:
-                estimasi_nilai_baru = input("Input estimasi nilai item ($): ")   # user input nilai item baru
+                estimasi_nilai_baru = input("Input estimasi nilai item ($): ").strip()   # user input nilai item baru
                 if estimasi_nilai_baru.isdigit():
                     break
                 else:
@@ -181,7 +181,7 @@ Anda akan menambahkan {item_baru} dengan ID {id_baru},
 1. Tambah item
 0. Kembali ke menu sebelumnya
     ''')
-                    checker1 = input("Input pilihan anda: ")
+                    checker1 = input("Input pilihan anda: ").strip()
                     if checker1 == "1":
                         inventory.append({"item_ID": id_baru, 
                                         "nama": item_baru, 
@@ -213,7 +213,7 @@ Apakah ingin menambah item lain?
 1. Tambah item lain
 0. Keluar menu
                               ''')
-                tombol = input("Input pilihan anda: ")
+                tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
                     break                                                              # mengembalikan ke menu tambahan item
@@ -235,7 +235,7 @@ Apakah ingin menambah item lain?
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
             print("="*lebar_tabel) 
 
-            hapus_id = input("Masukkan ID item yang ingin dihapus (ketik 0 untuk membatalkan): ").upper()
+            hapus_id = input("Masukkan ID item yang ingin dihapus (ketik 0 untuk membatalkan): ").upper().strip()
             if hapus_id == "0":
                 break               # kembali ke menu 3 jika batal menghapus
             found = False 
@@ -254,7 +254,7 @@ Anda akan menghapus {nama_terhapus} dengan ID {hapus_id},
 1. Hapus item
 0. Kembali ke menu sebelumnya
 ''')
-                    checker2 = input("Input pilihan anda: ")
+                    checker2 = input("Input pilihan anda: ").strip()
                     if checker2 == "1":
                         print(f"\nItem '{nama_terhapus}' dengan ID {hapus_id} berhasil dihapus!")
                         inventory.pop(hapus_index)
@@ -272,7 +272,7 @@ Apakah anda ingin menghapus item lain?
 1. Hapus item lain
 0. Keluar menu
                     ''')
-                tombol = input("Input pilihan anda: ")
+                tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
                     break                                                              # mengembalikan ke menu tambahan item
@@ -294,7 +294,7 @@ Apakah anda ingin menghapus item lain?
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
             print("="*lebar_tabel)
 
-            ubah_item = input("Input ID item yang akan diubah (input 0 untuk keluar): ").upper() # input untuk memasukkan ID item yang akan diubah
+            ubah_item = input("Input ID item yang akan diubah (input 0 untuk keluar): ").upper().strip() # input untuk memasukkan ID item yang akan diubah
             if ubah_item == "0":
                 print("Kembali ke menu utama.")
                 break
@@ -315,7 +315,7 @@ Daftar Kolom yang Bisa Diubah:
 2. Kategori
 0. Keluar
                 ''')            # menu perubahan
-            kolom_ubah = input("Input nomor kolom yang akan diubah: ")
+            kolom_ubah = input("Input nomor kolom yang akan diubah: ").strip()
 
             if kolom_ubah == "1":
                 key_ubah = "kondisi"
@@ -336,7 +336,7 @@ Anda akan merubah {key_ubah} menjadi {value_ubahan},
 1. Simpan perubahan
 0. Kembali ke menu sebelumnya
 ''')
-                checker3 = input("Input pilihan anda: ")
+                checker3 = input("Input pilihan anda: ").strip()
                 if checker3 =="1":
                     if key_ubah == "kategori":                                            # merubah kategori, dikarenakan kategori termasuk parameter ID item, ID juga diubah
                         kategori_awal = inventory[index_item]["kategori"]
@@ -372,7 +372,7 @@ Apakah ingin merubah kategori lain?
 1. Ubah item lain
 0. Keluar menu
                             ''')
-                tombol = input("Input pilihan anda: ")
+                tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
                     break                                                              # mengembalikan ke menu tambahan item
