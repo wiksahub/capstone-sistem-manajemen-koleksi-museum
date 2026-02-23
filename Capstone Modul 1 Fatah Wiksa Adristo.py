@@ -17,10 +17,19 @@ inventory = [
 
 header = f"| {"ID Item":<15} | {"Nama Item":<26}| {"Kategori": <15}| {"Berat":<8}| {"Kondisi":<10} | {"Tahun Masuk":<8} | {"Estimasi Nilai":<12} |"
 lebar_tabel = 118
+def no_input():
+    print("Tidak ada input. Ulangi lagi.")
+
+def tabel_inventaris():
+    print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
+    print("="*lebar_tabel) # border
+    print(header) # header tabel read
+    print("="*lebar_tabel) #border
+
 
 # Membuat infinite loop untuk menu aplikasi
 while True:
-    mainMenu = input('''
+    mainMenu = input("""
 Selamat Datang di Sistem Manajemen Penyimpanan Museum A
 ========================================================
 Silahkan Pilih Salah Satu dari Pilihan Berikut
@@ -31,29 +40,26 @@ Menu Utama:
 3. Menghapus Data dari Inventaris Museum
 4. Merubah Data dari Inventaris Museum
 0. Keluar
-Input Anda: ''').strip()
+Input Anda: """).strip()
 
     # Menampilkan inventaris museum
     if mainMenu == "1":
         while True:
-            print('''
+            print("""
 Menu Read Aplikasi:
 1. Tampilkan Keseluruhan Inventaris
 2. Tampilkan Berdasarkan Kategori
 3. Pencarian Berdasarkan ID
 0. Keluar Dari Menu
-            ''')
+            """)
             menuRead = input("Input nomor menu yang ingin dipilih: ").strip()
             if menuRead == "1":
                 while True:
-                    print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
-                    print("="*lebar_tabel) # border
-                    print(header) # header tabel read
-                    print("="*lebar_tabel) #border
+                    tabel_inventaris()
                     total_nilai = 0                        
                     for i in range(len(inventory)):
                         print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
-                        total_nilai += inventory[i]['estimasi_nilai']
+                        total_nilai += inventory[i]["estimasi_nilai"]
                     print("="*lebar_tabel)
                     print(f"Jumlah koleksi: {len(inventory)} item")
                     print(f"Total estimasi nilai aset: ${total_nilai}") 
@@ -84,11 +90,11 @@ Menu Read Aplikasi:
                     print("="*lebar_tabel)
 
                     while True:                                                             # membuat infinite loop untuk menu tambahan baru
-                        print('''
+                        print("""
 Apakah ingin mencari kategori lain?
 1. Cari kategori lain
 0. Keluar menu
-                              ''')
+                              """)
                         tombol = input("Input pilhan anda: ").strip()
                         
                         if tombol == "1":
@@ -120,11 +126,11 @@ Apakah ingin mencari kategori lain?
                         print(f"Item dengan ID '{readID}' tidak ditemukan.".center(118))
 
                     while True:                                                             # membuat infinite loop untuk menu tambahan baru
-                        print('''
+                        print("""
 Apakah ingin mencari item lain?
 1. Cari item lain
 0. Keluar menu
-                              ''')
+                              """)
                         tombol = input("Input pilihan anda: ").strip()
                         
                         if tombol == "1":
@@ -146,18 +152,30 @@ Apakah ingin mencari item lain?
     # Menambahkan stok baru ke inventaris museum
     elif mainMenu == "2":
         while True:
-            item_baru = input("Input nama item baru: ").capitalize().strip()             # user input nama item yang baru
-            if item_baru == "":
-                print("Tidak ada input. Kembali ke awal.")
-                break
-            kategori_baru = input("Input kategori item baru: ").capitalize().strip()     # user input kategori item baru
+            while True:
+                item_baru = input("Input nama item baru: ").capitalize().strip()             # user input nama item yang baru
+                if item_baru == "":
+                    no_input()
+                else:
+                    break
+            while True:
+                kategori_baru = input("Input kategori item baru: ").capitalize().strip()     # user input kategori item baru
+                if kategori_baru == "":
+                    no_input()
+                else:
+                    break
             while True:
                 berat_baru = input("Input berat item baru (kg): ").strip()               # user input berat item baru
                 if berat_baru.isdigit():
                     break
                 else:
                     print("Input harus dalam integer / angka")
-            kondisi_baru = input("Input kondisi item baru (Rusak/Restorasi/Display): ").capitalize().strip()       # user input kondisi item baru
+            while True:
+                kondisi_baru = input("Input kondisi item baru (Rusak/Restorasi/Display): ").capitalize().strip()       # user input kondisi item baru
+                if kondisi_baru == "":
+                    no_input()
+                else:
+                    break
             while True:
                 tahun_masuk_baru = input("Input tahun masuk item: ").strip()             # user input berat item baru
                 if tahun_masuk_baru.isdigit():
@@ -171,51 +189,48 @@ Apakah ingin mencari item lain?
                 else:
                     print("Input nilai harus dalam integer / angka")
             id_dasar = f"{tahun_masuk_baru}{kategori_baru[:3].upper()}" # menambahkan ID baru dari tahun, 3 huruf pertama nama item, 3 huruf pertama kategori
-            is_duplicate = True
-            if is_duplicate:
-                unique_id = 1
-                for item in inventory:
-                    if item["item_ID"].strip().startswith(id_dasar):    # menambahkan ID unik dibelakang ID dasar yang terdiri dari 3 digit
-                        unique_id += 1
+            id_ada = [item["item_ID"] for item in inventory]
+            unique_id = 1
+            while True:
                 id_baru = f"{id_dasar}{unique_id:03}" 
-                while True:
-                    print(f'''
+                if id_baru not in id_ada:
+                    break
+                unique_id += 1
+            while True:
+                print(f"""
 Anda akan menambahkan {item_baru} dengan ID {id_baru},
 1. Tambah item
 0. Kembali ke menu sebelumnya
-    ''')
-                    checker1 = input("Input pilihan anda: ").strip()
-                    if checker1 == "1":
-                        inventory.append({"item_ID": id_baru, 
-                                        "nama": item_baru, 
-                                        "kategori": kategori_baru, 
-                                        "berat": int(berat_baru), 
-                                        "kondisi": kondisi_baru, 
-                                        "tahun_masuk": int(tahun_masuk_baru), 
-                                        "estimasi_nilai": int(estimasi_nilai_baru)
-                                        }) # menambahkan item yang baru ke dalam tabel yang baru
-                        print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
-                        print("="*lebar_tabel)              # border
-                        print(header) # header tabel read
-                        print("="*lebar_tabel)
-                        for i in range(len(inventory)):
-                            print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
-                        print("="*lebar_tabel) 
-                        break
-                    elif checker1 == "0":
-                        break
-                    else:
-                        print("Input tidak valid.")
-                        break
-                if checker1 == "0":
+""")
+                checker1 = input("Input pilihan anda: ").strip()
+                if checker1 == "1":
+                    inventory.append({"item_ID": id_baru, 
+                                    "nama": item_baru, 
+                                    "kategori": kategori_baru, 
+                                    "berat": int(berat_baru), 
+                                    "kondisi": kondisi_baru, 
+                                    "tahun_masuk": int(tahun_masuk_baru), 
+                                    "estimasi_nilai": int(estimasi_nilai_baru)
+                                    }) # menambahkan item yang baru ke dalam tabel yang baru
+                    tabel_inventaris()
+                    for i in range(len(inventory)):
+                        print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
+                    print("="*lebar_tabel) 
                     break
+                elif checker1 == "0":
+                    break
+                else:
+                    print("Input tidak valid.")
+                    break
+            if checker1 == "0":
+                break
             
             while True:                                                             # membuat infinite loop untuk menu tambahan baru
-                print('''
+                print("""
 Apakah ingin menambah item lain?
 1. Tambah item lain
 0. Keluar menu
-                              ''')
+                              """)
                 tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
@@ -230,10 +245,7 @@ Apakah ingin menambah item lain?
     # Menghapus data yang ada pada data collection
     elif mainMenu == "3":
         while True:
-            print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
-            print("="*lebar_tabel)              # border
-            print(header) # header tabel read
-            print("="*lebar_tabel)
+            tabel_inventaris()
             for i in range(len(inventory)):
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
             print("="*lebar_tabel) 
@@ -252,14 +264,14 @@ Apakah ingin menambah item lain?
             if found:
                 nama_terhapus = inventory[hapus_index]["nama"]
                 while True:
-                    print(f'''
+                    print(f"""
 Anda akan menghapus {nama_terhapus} dengan ID {hapus_id},
 1. Hapus item
 0. Kembali ke menu sebelumnya
-''')
+""")
                     checker2 = input("Input pilihan anda: ").strip()
                     if checker2 == "1":
-                        print(f"\nItem '{nama_terhapus}' dengan ID {hapus_id} berhasil dihapus!")
+                        print(f"\nItem '{nama_terhapus}' dengan ID {hapus_id} berhasil dihapus.")
                         inventory.pop(hapus_index)
                         break
                     elif checker2 == "0":
@@ -270,11 +282,11 @@ Anda akan menghapus {nama_terhapus} dengan ID {hapus_id},
             else:
                 print(f"Item dengan ID {hapus_id} tidak ditemukan.")
             while True:                                                             # membuat infinite loop untuk menu tambahan baru
-                print('''
+                print("""
 Apakah anda ingin menghapus item lain?
 1. Hapus item lain
 0. Keluar menu
-                    ''')
+                    """)
                 tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
@@ -289,10 +301,7 @@ Apakah anda ingin menghapus item lain?
     # Merubah parameter pada data
     elif mainMenu == "4":
         while True:
-            print("Inventaris Museum".center(lebar_tabel))  # judul dari menu read
-            print("="*lebar_tabel)              # border
-            print(header) # header tabel read
-            print("="*lebar_tabel)
+            tabel_inventaris()
             for i in range(len(inventory)):
                 print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |") # menambahkan data dari data collection ke tabel
             print("="*lebar_tabel)
@@ -312,12 +321,12 @@ Apakah anda ingin menghapus item lain?
                 print("ID item tidak ditemukan. Silahkan dicoba lagi.")
                 continue
 
-            print('''
+            print("""
 Daftar Kolom yang Bisa Diubah:
 1. Kondisi
 2. Kategori
 0. Keluar
-                ''')            # menu perubahan
+                """)            # menu perubahan
             kolom_ubah = input("Input nomor kolom yang akan diubah: ").strip()
 
             if kolom_ubah == "1":
@@ -330,39 +339,42 @@ Daftar Kolom yang Bisa Diubah:
             else:
                 print("Input tidak valid.")
                 continue
-
-            value_ubahan = input(f"Masukkan {key_ubah} baru: ").capitalize().strip()      # input untuk merubah parameter ubahan
-            
             while True:
-                print(f'''
+                value_ubahan = input(f"Masukkan {key_ubah} baru: ").capitalize().strip()      # input untuk merubah parameter ubahan
+                if value_ubahan == "":
+                    no_input()
+                else:
+                    break
+            while True:
+                print(f"""
 Anda akan merubah {key_ubah} menjadi {value_ubahan},
 1. Simpan perubahan
 0. Kembali ke menu sebelumnya
-''')
+""")
                 checker3 = input("Input pilihan anda: ").strip()
                 if checker3 =="1":
                     if key_ubah == "kategori":                                            # merubah kategori, dikarenakan kategori termasuk parameter ID item, ID juga diubah
                         kategori_awal = inventory[index_item]["kategori"]
 
                         if value_ubahan != kategori_awal:
-                            
                             tahun = inventory[index_item]["tahun_masuk"]
-                            nama = inventory[index_item]["nama"]
                             id_dasar_update = f"{tahun}{value_ubahan[:3].upper()}"        # ID awal (belum ada 3 angka di belakang)
+                            id_sekarang = [item["item_ID"] for item in inventory]
+                            id_unik_update = 1
+                            while True:
+                                id_baru_update = f"{id_dasar_update}{id_unik_update:03}"                            # menambahkan ID unik
+                                if id_baru_update not in id_sekarang:
+                                    break
+                                id_unik_update += 1      
 
-                            id_unik_update = 0
-                            for item in inventory:
-                                if item["item_ID"].startswith(id_dasar_update):                             # menambahkan ID unik
-                                    id_unik_update += 1                                                     
                             inventory[index_item]["kategori"] = value_ubahan                    
-                            id_baru_update = f"{id_dasar_update}{(id_unik_update+1):03}"                    # menggabungkan ID awal dengan ID unik 3 digit (string)
                             inventory[index_item]["item_ID"] = id_baru_update
                             print(f"ID item telah diperbarui menjadi: {id_baru_update}")
                         else:
                             print("Kategori sama dengan sebelumnya. ID tidak berubah")
                     elif key_ubah == "kondisi":
                         inventory[index_item]["kondisi"] = value_ubahan
-                    print(f"Item {inventory[index_item]["nama"]} telah diubah.")
+                    print(f"Item {inventory[index_item]['nama']} telah diubah.")
                     break
                 elif checker3 =="0":
                     print("Perubahan dibatalkan.")
@@ -370,11 +382,11 @@ Anda akan merubah {key_ubah} menjadi {value_ubahan},
                 else:
                     print("Input tidak valid.")
             while True:                                                             # membuat infinite loop untuk menu tambahan baru
-                print('''
+                print("""
 Apakah ingin merubah kategori lain?
 1. Ubah item lain
 0. Keluar menu
-                            ''')
+                            """)
                 tombol = input("Input pilihan anda: ").strip()
                 
                 if tombol == "1":
