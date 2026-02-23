@@ -31,7 +31,7 @@ Menu Utama:
 3. Menghapus Data dari Inventaris Museum
 4. Merubah Data dari Inventaris Museum
 0. Keluar
-Input Anda: ''')
+Input Anda: ''').strip()
 
     # Menampilkan inventaris museum
     if mainMenu == "1":
@@ -58,7 +58,7 @@ Menu Read Aplikasi:
                     print(f"Jumlah koleksi: {len(inventory)} item")
                     print(f"Total estimasi nilai aset: ${total_nilai}") 
                     print("\n0. Keluar dari menu")   
-                    tombol = input("Input '0' jika ingin keluar: ") #input untuk user memilih untuk keluar dari menu, jika tidak "0", maka muncul prompt bahwa input tidak valid
+                    tombol = input("Input '0' jika ingin keluar: ").strip() #input untuk user memilih untuk keluar dari menu, jika tidak "0", maka muncul prompt bahwa input tidak valid
                     if tombol == "0":
                         break
                     else:
@@ -328,7 +328,7 @@ Daftar Kolom yang Bisa Diubah:
                 print("Input tidak valid.")
                 continue
 
-            value_ubahan = input(f"Masukkan {key_ubah} baru: ").capitalize()      # input untuk merubah parameter ubahan
+            value_ubahan = input(f"Masukkan {key_ubah} baru: ").capitalize().strip()      # input untuk merubah parameter ubahan
             
             while True:
                 print(f'''
