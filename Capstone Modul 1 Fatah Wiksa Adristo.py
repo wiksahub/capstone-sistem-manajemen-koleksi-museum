@@ -76,7 +76,7 @@ Menu Read Aplikasi:
                     
                     for i in range(len(inventory)):
                         if inventory[i]["kategori"].capitalize() == readKategori:    # membandingkan input user dengan value di kolom "kategori"
-                            print(f"| {inventory[i]['item_ID']:<15} | {inventory[i]['nama']:<25} | {inventory[i]['kategori']:<15}| {inventory[i]['berat']:>8}| {inventory[i]['kondisi']:<10} | {inventory[i]['tahun_masuk']:<11} | {inventory[i]['estimasi_nilai']:>14} |")
+                            print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |")
                             found = True
                     if not found:
                         print(f"Item dengan kategori '{readKategori}' tidak ditemukan.".center(118))
@@ -111,7 +111,7 @@ Apakah ingin mencari kategori lain?
                             print("="*lebar_tabel)
                             print(header)
                             print("="*lebar_tabel)
-                            print(f"| {inventory[i]['item_ID']:<15} | {inventory[i]['nama']:<25} | {inventory[i]['kategori']:<15}| {inventory[i]['berat']:>8}| {inventory[i]['kondisi']:<10} | {inventory[i]['tahun_masuk']:<11} | {inventory[i]['estimasi_nilai']:>14} |")
+                            print(f"| {inventory[i]["item_ID"]:<15} | {inventory[i]["nama"]:<25} | {inventory[i]["kategori"]:<15}| {inventory[i]["berat"]:>8}| {inventory[i]["kondisi"]:<10} | {inventory[i]["tahun_masuk"]:<11} | {inventory[i]["estimasi_nilai"]:>14} |")
                             print("="*lebar_tabel)
                             found = True
                             break 
@@ -147,6 +147,9 @@ Apakah ingin mencari item lain?
     elif mainMenu == "2":
         while True:
             item_baru = input("Input nama item baru: ").capitalize().strip()             # user input nama item yang baru
+            if item_baru == "":
+                print("Tidak ada input. Kembali ke awal.")
+                break
             kategori_baru = input("Input kategori item baru: ").capitalize().strip()     # user input kategori item baru
             while True:
                 berat_baru = input("Input berat item baru (kg): ").strip()               # user input berat item baru
